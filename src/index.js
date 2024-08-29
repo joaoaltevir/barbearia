@@ -30,3 +30,24 @@ app.delete("usuario/:id", (req,res)=>{
 
 //GERENCIAMENTO DE CLIENTE
 
+app.post("/cliente", (req, res) => {
+    const cliente = req.body;
+    const code = clienteController.store(cliente);
+    res.status(code).json();
+})
+app.get("/cliente",(req, res)=> {
+    res.json(clienteController.index());
+})
+app.get("/cliente/:id", (req, res)=>{
+    const code = clienteController.show(req.params.id);
+    res.status(code).json();
+})
+app.put("cliente/:id", (req, res) =>{
+    const cliente = req.body;
+    const code = clienteController.update(cliente, req.params.id);
+    res.status(code).json();
+})
+app.delete("cliente/:id", (req,res)=>{
+    const code = clienteController.destroy(req.params.id);
+    res.status(code).json();
+})
