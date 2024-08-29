@@ -11,7 +11,7 @@ app.post("/usuario", (req, res) => {
     const usuario = req.body;
     const code = usuarioController.store(usuario);
     res.status(code).json();
-})
+});
 app.get("/usuario",(req, res)=> {
     res.json(usuarioController.index());
 })
