@@ -1,4 +1,5 @@
 const express = require('express');
+const cepEndereco = require("./middlewares/cep_endereco.js")
 const app = express();
 const port = 3000
 
@@ -50,4 +51,31 @@ app.put("cliente/:id", (req, res) =>{
 app.delete("cliente/:id", (req,res)=>{
     const code = clienteController.destroy(req.params.id);
     res.status(code).json();
+})
+
+//GERENCIAMENTO DE BARBEARIA
+
+app.post("/barbearia", cepEndereco, (req, res) => {
+     const barbearia = req.body
+     const code = barbeariaController.store(barbearia)
+})
+app.get("/barbearia",(req, res)=> {
+    res.json(barbeariaController.index());
+})
+app.get("/barbearia/:id", (req, res)=>{
+    const code = barbeariaController.show(req.params.id);
+    res.status(code).json();
+})
+app.put("barbearia/:id", (req, res) =>{
+    const barbearia = req.body;
+    const code = barbeariaController.update(barbearia, req.params.id);
+    res.status(code).json();
+})
+app.delete("barbearia/:id", (req,res)=>{
+    const code = barbeariaController.destroy(req.params.id);
+    res.status(code).json();
+})
+
+app.listen(port, () => {
+    console.log(`server running in ${port} port`)
 })
