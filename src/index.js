@@ -130,6 +130,30 @@ app.delete("barbeiro/:id", (req,res)=>{
 })
 
 
+//GERENCIMANENTO DE SERVIÇO
+
+app.post("/servico", (req, res) => {
+    const servico = req.body
+    const code = servicoController.store(servico)
+    res.status(code).json()
+})
+app.get("/servico",(req, res)=> {
+   res.json(servicoController.index());
+})
+app.get("/servico/:id", (req, res)=>{
+   const code = servicoController.show(req.params.id);
+   res.status(code).json();
+})
+app.put("servico/:id", (req, res) =>{
+   const servico = req.body;
+   const code = servicoController.update(servico, req.params.id);
+   res.status(code).json();
+})
+app.delete("servico/:id", (req,res)=>{
+   const code = servicoController.destroy(req.params.id);
+   res.status(code).json();
+})
+
 app.listen(port, () => {
     console.log(`server running in ${port} port`)
 })
