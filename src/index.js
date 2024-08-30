@@ -1,5 +1,9 @@
 const express = require('express');
 const cepEndereco = require("./middlewares/cep_endereco.js")
+const redeController = require("./controllers/rede.js");
+const clienteController = require("./controllers/cliente.js");
+const barbeariaController = require("./controllers/barbearia.js");
+const usuarioController = require("./controllers/usuario.js");
 const app = express();
 const port = 3000
 
@@ -58,6 +62,7 @@ app.delete("cliente/:id", (req,res)=>{
 app.post("/barbearia", cepEndereco, (req, res) => {
      const barbearia = req.body
      const code = barbeariaController.store(barbearia)
+     res.status(code).json();
 })
 app.get("/barbearia",(req, res)=> {
     res.json(barbeariaController.index());
@@ -76,6 +81,32 @@ app.delete("barbearia/:id", (req,res)=>{
     res.status(code).json();
 })
 
+//GERENCIAMENTO DE REDES
+
+app.post("/rede", (req, res) => {
+    const rede = req.body
+    const code = redeController.store(rede)
+    res.status(code).json()
+})
+app.get("/rede",(req, res)=> {
+   res.json(redeController.index());
+})
+app.get("/rede/:id", (req, res)=>{
+   const code = redeController.show(req.params.id);
+   res.status(code).json();
+})
+app.put("rede/:id", (req, res) =>{
+   const rede = req.body;
+   const code = redeController.update(rede, req.params.id);
+   res.status(code).json();
+})
+app.delete("rede/:id", (req,res)=>{
+   const code = redeController.destroy(req.params.id);
+   res.status(code).json();
+})
+
 app.listen(port, () => {
     console.log(`server running in ${port} port`)
 })
+
+
