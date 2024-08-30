@@ -1,20 +1,5 @@
 const db = [];
-let nextID = 1
-const model = (body, id = nextID++) => {
-    if(
-        body.email != "",
-        body.email != undefined,
-        body.senha != "",
-        body.senha != undefined,
-        body.senha.lenght > 3  
-    ){
-        return {
-            id,
-            email: body.email,
-            senha: body.senha
-        }
-    }
-}
+const model = require('../models/usuario.js')
 
 const store = body => {
     const novo = model(body);
