@@ -1,19 +1,5 @@
 const db = [];
-let nextID = 1
-const usuarioController = require('./usuario.js')
-const model = (body, id = nextID++) => {
-    if(
-        body.nome != "",
-        body.nome != undefined,
-        usuarioController.show(body.idUsuario)
-    ){
-        return {
-            id,
-            nome: body.nome,
-            idUsuario: body.idUsuario
-        }
-    }
-}
+const model = require("../models/rede.js")
 
 const store = body => {
     const novo = model(body);
