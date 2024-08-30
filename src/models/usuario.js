@@ -4,8 +4,7 @@ const model = (body, id = nextID++) => {
         body.email != "",
         body.email != undefined,
         body.senha != "",
-        body.senha != undefined,
-        body.senha.lenght > 3  
+        body.senha != undefined
     ){
         return {
             id,
