@@ -71,7 +71,7 @@ app.get("/barbearia/:id", (req, res)=>{
     const code = barbeariaController.show(req.params.id);
     res.status(code).json();
 })
-app.put("barbearia/:id", (req, res) =>{
+app.put("barbearia/:id", cepEndereco, (req, res) =>{
     const barbearia = req.body;
     const code = barbeariaController.update(barbearia, req.params.id);
     res.status(code).json();
@@ -105,8 +105,36 @@ app.delete("rede/:id", (req,res)=>{
    res.status(code).json();
 })
 
+//GERENCIAMENTO BARBEIRO
+
+app.post("/barbeiro", (req, res) => {
+    const barbeiro = req.body
+    const code = barbeiroController.store(barbeiro)
+    res.status(code).json()
+})
+app.get("/barbeiro",(req, res)=> {
+   res.json(barbeiroController.index());
+})
+app.get("/barbeiro/:id", (req, res)=>{
+   const code = barbeiroController.show(req.params.id);
+   res.status(code).json();
+})
+app.put("barbeiro/:id", (req, res) =>{
+   const barbeiro = req.body;
+   const code = barbeiroController.update(barbeiro, req.params.id);
+   res.status(code).json();
+})
+app.delete("barbeiro/:id", (req,res)=>{
+   const code = barbeiroController.destroy(req.params.id);
+   res.status(code).json();
+})
+
+
 app.listen(port, () => {
     console.log(`server running in ${port} port`)
 })
+
+
+
 
 
