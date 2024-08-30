@@ -15,7 +15,7 @@ const model = (body, id = nextID++) => {
             nome: body.nome,
             bio: body.bio,
             foto: body.foto,
-            idbarbearia: body.idbarbearia
+            idBarbearia: body.idBarbearia
         }
     }
 }
